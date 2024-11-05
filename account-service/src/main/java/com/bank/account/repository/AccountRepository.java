@@ -1,5 +1,7 @@
 package com.bank.account.repository;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -18,5 +20,8 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 	
 	@Query("SELECT txnPassword FROM Account WHERE accountNo=:accNo")
 	public String getTxnPassword(Long accNo);
+	
+	@Query("UPDATE Account SET lastTxnDate=:timestamp WHERE accountNo=:accNo")
+	public void updateLastTxnTimestamp(Long accNo, LocalDateTime timestamp);
 
 }

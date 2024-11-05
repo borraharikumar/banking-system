@@ -10,7 +10,7 @@ public class MoneyWithdrawResponse {
 	private Double debitedAmount;
 	private Double currentBalance;
 	private String status;
-	private Long txnNumber;
+	private String txnNumber;
 	private String refNumber;
 
 }

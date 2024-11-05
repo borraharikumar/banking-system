@@ -11,7 +11,7 @@ public class MoneyDepositResponse {
 	private Double currentBalance;
 	private String depositedBy;
 	private String status;
-	private Long txnNumber;
+	private String txnNumber;
 	private String refNumber;
 
 }

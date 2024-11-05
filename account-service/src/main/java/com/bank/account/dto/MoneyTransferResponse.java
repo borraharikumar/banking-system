@@ -9,8 +9,8 @@ public class MoneyTransferResponse {
 	private Long beneAccountNo;
 	private Double txnAmount;
 	private String status;
-	private Long hostAccountTxnNumber;
-	private Long beneAccountTxnNumber;
+	private String hostAccountTxnNumber;
+	private String beneAccountTxnNumber;
 	private String refNumber;
 
 }

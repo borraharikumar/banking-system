@@ -1,5 +1,7 @@
 package com.bank.account.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,7 @@ public class AccountServiceImpl implements IAccountService {
 		depositResponse.setPreviousBalance(dto.getBalance());
 		
 		dto.setBalance(dto.getBalance()+depositRequest.getAmount());
+		dto.setLastTxnDate(LocalDateTime.now());
 		
 		depositResponse.setCreditedAmount(depositRequest.getAmount());
 		depositResponse.setCurrentBalance(createAccount(dto).getBalance());
@@ -59,9 +62,10 @@ public class AccountServiceImpl implements IAccountService {
 		withdrawResponse.setAccountNo(dto.getAccountNo());
 		withdrawResponse.setPreviousBalance(dto.getBalance());
 		
-		if(dto.getBalance()>withdrawRequest.getAmount())
+		if(dto.getBalance()>withdrawRequest.getAmount()) {
 			dto.setBalance(dto.getBalance()-withdrawRequest.getAmount());
-		else
+			dto.setLastTxnDate(LocalDateTime.now());
+		} else
 			throw new InsufficientBalanceException("Insufficient balance...!");
 		
 		withdrawResponse.setDebitedAmount(withdrawRequest.getAmount());
