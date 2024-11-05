@@ -1,6 +1,7 @@
 package com.bank.customer.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bank.customer.dto.CustomerDto;
@@ -14,9 +15,11 @@ public class CustomerServiceImpl implements ICustomerService {
 	
 	@Autowired private CustomerRepository customerRepository;
 	@Autowired private CustomerMapper customerMapper;
+	@Autowired private PasswordEncoder passwordEncoder;
 
 	@Override
 	public CustomerDto saveCustomer(CustomerDto dto) {
+		dto.getLoginCredentials().setPassword(passwordEncoder.encode(dto.getLoginCredentials().getPassword()));
 		return customerMapper.mapToCustomerDto(customerRepository.save(customerMapper.mapToCustomer(dto)));
 	}
 
@@ -39,6 +42,11 @@ public class CustomerServiceImpl implements ICustomerService {
 		getCustomer(custId);
 		customerRepository.deleteById(custId);
 		return "Customer with id '" + custId + "' deleted successfully...!";
+	}
+
+	@Override
+	public Boolean validateCustomer(Long customerId, String password) {
+		return passwordEncoder.matches(password, customerRepository.getCountOfCustomers(customerId));
 	}
 
 }

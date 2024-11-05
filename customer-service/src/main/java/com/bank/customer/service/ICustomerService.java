@@ -8,5 +8,6 @@ public interface ICustomerService {
 	public CustomerDto getCustomer(Long custId);
 	public CustomerDto updateCustomer(CustomerDto dto);
 	public String deleteCustomer(Long custId);
+	public Boolean validateCustomer(Long customerId, String password);
 
 }

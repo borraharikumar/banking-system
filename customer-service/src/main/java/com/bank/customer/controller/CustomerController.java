@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bank.customer.dto.CustomerDto;
+import com.bank.customer.dto.CustomerValidationRequest;
 import com.bank.customer.service.ICustomerService;
 
 @RestController
@@ -40,6 +41,11 @@ public class CustomerController {
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteCustomer(@PathVariable Long id) {
 		return ResponseEntity.ok(customerService.deleteCustomer(id));
+	}
+	
+	@PostMapping("/validate")
+	public Boolean validateCustomer(@RequestBody CustomerValidationRequest request) {
+		return customerService.validateCustomer(request.getCustomerId(), request.getPassword());
 	}
 
 }
