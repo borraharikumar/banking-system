@@ -1,6 +1,6 @@
 package com.bank.txn.repository.service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bank.txn.entity.TransactionRecord;
 import com.bank.txn.repository.TransactionRepository;
+import com.bank.txn.repository.exception.TxnNotFoundException;
 
 @Service
 public class TransactionServiceImpl implements ITransactionService {
@@ -21,38 +22,33 @@ public class TransactionServiceImpl implements ITransactionService {
 
 	@Override
 	public List<TransactionRecord> getTransactionRecordsByAccountNo(Long accNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return txnRepository.getAccountTransactions(accNo);
 	}
 
 	@Override
 	public List<TransactionRecord> getTransactionRecordsByAccountNo(Long accNo, String txnType) {
-		// TODO Auto-generated method stub
-		return null;
+		return txnRepository.getAccountTransactions(accNo, txnType);
 	}
 
 	@Override
-	public List<TransactionRecord> getTransactionRecordsByAccountNo(Long accNo, LocalDate fromDate, LocalDate toDate) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TransactionRecord> getTransactionRecordsByAccountNo(Long accNo, LocalDateTime fromDate, LocalDateTime toDate) {
+		return txnRepository.getAccountTransactions(accNo, fromDate, toDate);
 	}
 
 	@Override
 	public List<TransactionRecord> getTransactionRecordsByRefNo(String refNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return txnRepository.getTransactionRecordsByRefNo(refNo);
 	}
 
 	@Override
-	public List<TransactionRecord> getTransactionRecordsByStatus(String status) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TransactionRecord> getTransactionRecordsByStatus(Long accNo, String status) {
+		return txnRepository.getTransactionRecordsByStatus(accNo, status);
 	}
 
 	@Override
-	public TransactionRecord getTransactionRecord(Long txnNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public TransactionRecord getTransactionRecord(String txnNo) {
+		return txnRepository.findById(txnNo)
+					.orElseThrow(()->new TxnNotFoundException("Transaction not found with txn_id '" + txnNo + "'"));
 	}
 
 }
