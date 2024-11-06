@@ -19,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.bank.account.dto.AccountDto;
 import com.bank.account.dto.AccountOpeningRequest;
+import com.bank.account.dto.AccountValidationRequest;
 import com.bank.account.dto.CustomerValidationRequest;
 import com.bank.account.dto.MoneyDepositRequest;
 import com.bank.account.dto.MoneyDepositResponse;
@@ -123,6 +124,11 @@ public class AccountController {
 	@GetMapping("/{accNo}")
 	public ResponseEntity<AccountDto> getAccount(@PathVariable Long accNo) {
 		return ResponseEntity.ok(accountService.getAccount(accNo));
+	}
+	
+	@PostMapping("/validate")
+	public ResponseEntity<Boolean> validateAccountCredentials(@RequestBody AccountValidationRequest valRequest) {
+		return ResponseEntity.ok(passwordEncoder.matches(valRequest.getPassword(), accountService.getPassword(valRequest.getAccountNo())));
 	}
 
 }
