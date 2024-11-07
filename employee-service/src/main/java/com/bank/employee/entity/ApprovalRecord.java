@@ -14,7 +14,7 @@ import lombok.Data;
 @Entity
 @Table(name = "approval_record_tab")
 public class ApprovalRecord {
-	
+
 	@Id
 	@GeneratedValue(generator="app_id_gen", strategy=GenerationType.SEQUENCE)
 	@SequenceGenerator(name="app_id_gen", sequenceName="approval_id_seq", initialValue=10000, allocationSize=1)

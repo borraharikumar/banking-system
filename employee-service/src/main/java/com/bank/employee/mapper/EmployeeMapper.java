@@ -19,6 +19,7 @@ public class EmployeeMapper {
 		employee.setMobileNo(dto.getMobileNo());
 		employee.setDepartment(dto.getDepartment());
 		employee.setAssignedBranch(dto.getAssignedBranch());
+		employee.setPassword(dto.getPassword());
 		return employee;
 	}
 	
@@ -32,6 +33,7 @@ public class EmployeeMapper {
 		dto.setMobileNo(employee.getMobileNo());
 		dto.setDepartment(employee.getDepartment());
 		dto.setAssignedBranch(employee.getAssignedBranch());
+		dto.setPassword(employee.getPassword());
 		return dto;
 	}
 

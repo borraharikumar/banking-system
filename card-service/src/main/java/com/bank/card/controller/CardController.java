@@ -28,7 +28,7 @@ public class CardController {
 							 .body(cardService.insertCard(card));
 	}
 	
-	@GetMapping
+	@GetMapping("/{cardNo}")
 	public ResponseEntity<Card> getCard(@PathVariable Long cardNo) {
 		return ResponseEntity.ok(cardService.getCard(cardNo));
 	}

@@ -24,5 +24,6 @@ public class Employee {
 	private Long mobileNo;
 	private String department;
 	private String assignedBranch;
+	private String password;
 
 }

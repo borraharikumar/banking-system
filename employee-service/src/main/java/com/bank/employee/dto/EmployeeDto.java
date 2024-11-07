@@ -13,5 +13,6 @@ public class EmployeeDto {
 	private Long mobileNo;
 	private String department;
 	private String assignedBranch;
+	private String password;
 
 }
